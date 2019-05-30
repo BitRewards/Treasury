@@ -1,0 +1,57 @@
+version: '2'
+
+services:
+  treasury-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${TREASURY_DB_USER}
+      POSTGRES_PASSWORD: ${TREASURY_DB_PASSWORD}
+      POSTGRES_DB: treasury
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - treasury_network
+  treasury-web:
+    image: nginx
+    restart: always
+    ports:
+      - "8083:80"
+    volumes:
+      - ${SRC_ROOT}:/app
+      - ./nginx/sites/${ENV}.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/${ENV}.default.conf:/etc/nginx/${ENV}.default.conf
+    links:
+      - treasury-php
+    networks:
+      - treasury_network
+
+  treasury-php:
+    extends:
+      file: base-php/base-php.yml
+      service: base-php
+    restart: always
+    working_dir: /app
+    entrypoint:
+      - /app/docker/bin/startup.sh
+    volumes:
+      - ${SRC_ROOT}:/app
+    links:
+      - treasury-db
+      - treasury-beanstalkd
+    networks:
+      - treasury_network
+
+  treasury-beanstalkd:
+    image: schickling/beanstalkd
+    restart: always
+    networks:
+      - treasury_network
+
+networks:
+  treasury_network:
+
+volumes:
+  postgres-data:

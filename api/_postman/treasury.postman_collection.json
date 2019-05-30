@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "6e9154ba-2275-46d0-b7fa-f40cd4a8f9be",
+		"name": "treasury",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.test\", \"id\": 1}"
+				},
+				"url": {
+					"raw": "{{treasury.json-rpc}}",
+					"host": [
+						"{{treasury.json-rpc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test-with-params",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.test-with-params\", \"params\": {\"foo\": \"bar\"}, \"id\": 1}"
+				},
+				"url": {
+					"raw": "{{treasury.json-rpc}}",
+					"host": [
+						"{{treasury.json-rpc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createWallet",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.create-wallet\", \"params\": {\"crm_user_id\": \"1\", \"api_key\": \"{{test_key_1}}\", \"callback_url\": \"{{token_callback_url}}\"}, \"id\": 1}\n]"
+				},
+				"url": {
+					"raw": "{{treasury.json-rpc}}",
+					"host": [
+						"{{treasury.json-rpc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBalance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.get-balance\", \"params\": { \"api_key\": \"{{test_key_1}}\"}, \"id\": 1},\n\t{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.get-balance\", \"params\": { \"api_key\": \"{{test_key_2}}\"}, \"id\": 2}\n]"
+				},
+				"url": {
+					"raw": "{{treasury.json-rpc}}",
+					"host": [
+						"{{treasury.json-rpc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "withdraw",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.withdraw\", \"params\": { \"api_key\": \"{{test_key_1}}\", \"dest_address\": \"{{withdraw_address}}\", \"amount\": \"{{withdraw_amount}}\", \"currency\": 1, \"callback_url\": \"{{withdraw_callback_url}}\", \"withdraw_key\": \"{{withdraw_key_1}}\"}, \"id\": 1}"
+				},
+				"url": {
+					"raw": "{{treasury.json-rpc}}",
+					"host": [
+						"{{treasury.json-rpc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listTransactions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.list-transactions\", \"params\": { \"api_key\": \"{{test_key_1}}\"}, \"id\": 1}\n]"
+				},
+				"url": {
+					"raw": "{{treasury.json-rpc}}",
+					"host": [
+						"{{treasury.json-rpc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "estimateGas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.token-transfer-eth-fee-estimate\", \"params\": {\"api_key\": \"{{test_key_1}}\"}, \"id\": 1},\n\t{\"jsonrpc\": \"2.0\", \"method\": \"v1.wallet.eth-transfer-fee-estimate\", \"params\": {\"api_key\": \"{{test_key_1}}\"}, \"id\": 2}\n]"
+				},
+				"url": {
+					"raw": "{{treasury.json-rpc}}",
+					"host": [
+						"{{treasury.json-rpc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "convert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\"jsonrpc\": \"2.0\", \"method\": \"v1.currency.convert\", \"params\": { \"currencyFrom\": \"RUB\", \"amountFrom\": 1}, \"id\": 1}\n]"
+				},
+				"url": {
+					"raw": "{{treasury.json-rpc}}",
+					"host": [
+						"{{treasury.json-rpc}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
